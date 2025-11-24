@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/velkamban/flask-contact-form.git'
+                git branch: 'main', url: 'https://github.com/velkadamban/flask-contact-form.git'
             }
         }
         
