@@ -29,8 +29,8 @@ spec:
           name: postgres-data
       volumes:
       - name: postgres-data
-        persistentVolumeClaim:
-          claimName: postgres-pvc
+        emptyDir: {}
+
 ---
 apiVersion: v1
 kind: Service
@@ -43,14 +43,3 @@ spec:
     - protocol: TCP
       port: 5432
       targetPort: 5432
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
