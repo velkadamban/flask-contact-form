@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: YOUR_ECR_URL/flask-app:latest  # ← Will be replaced by Jenkins
+        image: YOUR_ECR_URL/my-flask-app:latest  # ← Will be replaced by Jenkins
         ports:
         - containerPort: 5000
         env:
