@@ -25,14 +25,13 @@ def get_db_connection():
     """Create connection to PostgreSQL database"""
     try:
         conn = psycopg2.connect(
-            host="db",                      # ← Docker service name
-            database="tamilnadu_contacts",  # ← Database name
-            user="postgres",                # ← Username (MUST match docker-compose)
-            password="postgres",            # ← Password (MUST match docker-compose)
+            host="postgres-service",        # ← K8s service name
+            database="tamilnadu_contacts",
+            user="postgres",
+            password="postgres", 
             port="5432",
             connect_timeout=10
         )
-        logger.info("✅ Successfully connected to database!")
         return conn
     except Exception as e:
         logger.error(f"❌ Database connection failed: {e}")
