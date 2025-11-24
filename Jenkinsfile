@@ -2,23 +2,24 @@ pipeline {
     agent any
     
     environment {
-        AWS_ACCOUNT_ID = '399934155236'
-        AWS_REGION = 'ap-southeast-2'
-        ECR_REPO = 'my-flask-app'
-        CLUSTER_NAME = 'my-flask-cluster'
+        AWS_ACCOUNT_ID = 'YOUR_ACTUAL_AWS_ACCOUNT_ID'
+        AWS_REGION = 'us-east-1'
+        ECR_REPO = 'flask-app'
+        CLUSTER_NAME = 'YOUR_EKS_CLUSTER_NAME'
     }
     
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/velkadamban/flask-contact-form.git'
+                git branch: 'main', url: 'https://github.com/velkamban/flask-contact-form.git'
             }
         }
         
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${ECR_REPO}:${env.BUILD_ID}")
+                    // FIXED: Use sh command instead of docker.build
+                    sh "docker build -t ${ECR_REPO}:${env.BUILD_ID} ."
                 }
             }
         }
@@ -43,14 +44,9 @@ pipeline {
         stage('Update K8s Deployment') {
             steps {
                 sh """
-                    # Update k8s deployment with new image
                     sed -i 's|YOUR_ECR_URL|${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com|g' flask-deployment.yaml
-                    
-                    # Apply k8s configuration
                     kubectl apply -f flask-deployment.yaml
                     kubectl apply -f postgresql-deployment.yaml
-                    
-                    # Rollout restart to pick up new image
                     kubectl rollout restart deployment/flask-app
                 """
             }
