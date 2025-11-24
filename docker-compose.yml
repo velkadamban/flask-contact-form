@@ -1,0 +1,32 @@
+services:
+  web:
+    build: .
+    container_name: tamilnadu_web
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_NAME=tamilnadu_contacts
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:13
+    container_name: tamilnadu_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tamilnadu_contacts
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

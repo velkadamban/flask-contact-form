@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>தமிழ்நாடு - Pride of South India</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="{{ url_for('index') }}" class="logo">
+                <i class="fas fa-peacock"></i> தமிழ்நாடு <span>Pride</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('contact_list') }}">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>தமிழ்நாடு <br> The Homeland of Tamils </h1>
+            <p>Discover the rich heritage, culture, and beauty of Tamil Nadu</p>
+            <a href="{{ url_for('contact') }}" class="cta-button">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Tamil Nadu is Special</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏛️</div>
+                    <h3>Ancient Temples</h3>
+                    <p>Home to magnificent Tamil architecture with temples dating back 2000+ years</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Rich Culture</h3>
+                    <p>Birthplace of classical arts, literature, and the world's oldest language - Tamil</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🍛</div>
+                    <h3>Delicious Cuisine</h3>
+                    <p>Famous for authentic Tamil dishes like dosa, idli, and filter coffee</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏞️</div>
+                    <h3>Natural Beauty</h3>
+                    <p>From Nilgiri hills to Marina beach, experience diverse landscapes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section class="culture">
+        <div class="container">
+            <h2 class="section-title">Cultural Heritage</h2>
+            <div class="culture-grid">
+                <div class="culture-item">
+                    <i class="fas fa-landmark fa-3x"></i>
+                    <h3>5000+ Years History</h3>
+                    <p>One of the oldest civilizations in the world</p>
+                </div>
+                <div class="culture-item">
+                    <i class="fas fa-book fa-3x"></i>
+                    <h3>Sangam Literature</h3>
+                    <p>Ancient Tamil literature dating to 600 BCE</p>
+                </div>
+                <div class="culture-item">
+                    <i class="fas fa-music fa-3x"></i>
+                    <h3>Classical Arts</h3>
+                    <p>Tamil dance and Tamil music</p>
+                </div>
+                <div class="culture-item">
+                    <i class="fas fa-utensils fa-3x"></i>
+                    <h3>Unique Cuisine</h3>
+                    <p>World-famous Chettinad and Kongunadu cuisine</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Tamil Nadu Pride. All rights reserved.</p>
+            <p>Experience the grandeur of Thenpulam's gem</p>
+        </div>
+    </footer>
+</body>
+</html>
