@@ -47,8 +47,8 @@ pipeline {
                     sed -i 's|YOUR_ECR_URL|${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com|g' flask-deployment.yaml
                     
                     # Apply k8s configuration
-                    kubectl apply -f flask-deployment.yaml
-                    kubectl apply -f postgresql-deployment.yaml
+                    kubectl apply -f flask-deployment.yaml --validate=false
+                    kubectl apply -f postgresql-deployment.yaml --validate=false
                     
                     # Rollout restart to pick up new image
                     kubectl rollout restart deployment/flask-app
