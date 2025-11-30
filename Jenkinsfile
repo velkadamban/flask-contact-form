@@ -59,8 +59,8 @@ pipeline {
                     sed -i 's|YOUR_ECR_URL|${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com|g' flask-deployment.yaml
                     
                     # Apply EFS storage configuration
-                    kubectl apply -f efs-pv.yaml
-                    kubectl apply -f efs-pvc.yaml
+                    kubectl apply -f volumes/efs-pv.yaml
+                    kubectl apply -f volumes/efs-pvc.yaml
                     
                     # Apply k8s configuration
                     kubectl apply -f flask-deployment.yaml
