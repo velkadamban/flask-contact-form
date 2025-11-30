@@ -29,7 +29,8 @@ spec:
           name: postgres-data
       volumes:
       - name: postgres-data
-        emptyDir: {}
+        persistentVolumeClaim:
+          claimName: efs-pvc
 
 ---
 apiVersion: v1
