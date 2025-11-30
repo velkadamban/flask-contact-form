@@ -6,6 +6,7 @@ pipeline {
         AWS_REGION = 'ap-southeast-2'
         ECR_REPO = 'my-flask-app'
         CLUSTER_NAME = 'my-flask-cluster'
+        KUBECONFIG = credentials('kubeconfig')
     }
     
     stages {
@@ -40,11 +41,24 @@ pipeline {
             }
         }
         
+        stage('Install EFS CSI Driver') {
+            steps {
+                sh """
+                    # Install EFS CSI driver
+                    kubectl apply -k "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.7"
+                """
+            }
+        }
+        
         stage('Update K8s Deployment') {
             steps {
                 sh """
                     # Update k8s deployment with new image
                     sed -i 's|YOUR_ECR_URL|${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com|g' flask-deployment.yaml
+                    
+                    # Apply EFS storage configuration
+                    kubectl apply -f efs-pv.yaml --validate=false
+                    kubectl apply -f efs-pvc.yaml --validate=false
                     
                     # Apply k8s configuration
                     kubectl apply -f flask-deployment.yaml --validate=false
