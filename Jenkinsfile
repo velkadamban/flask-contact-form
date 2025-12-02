@@ -47,7 +47,7 @@ pipeline {
                     aws eks update-kubeconfig --region ${AWS_REGION} --name ${CLUSTER_NAME}
                     
                     # Install EFS CSI driver
-                    kubectl apply -k "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.7"
+                    kubectl apply -f k8s/efs-csi-driver/
                 """
             }
         }
